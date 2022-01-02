@@ -248,7 +248,7 @@ resource "azurerm_function_app" "function_worker" {
     "KeyVault_BaseUri"                      = azurerm_key_vault.keyvault.vault_uri
     "KeyVault_ManagedIdentityClientId"      = azurerm_user_assigned_identity.keyvault_api_managed_identity.client_id
     "DataLake_BaseUri"                      = "<none>"
-    "DataLake_ManagedIdentityClientId"      = azurerm_user_assigned_identity.datalake_api_managed_identity.client_id
+    "DataLake_ManagedIdentityClientId"      = azurerm_user_assigned_identity.datalake_managed_identity.client_id
     "RuntimeReport_Cron"                    = "0 0 */6 * * *"
   }
 }
