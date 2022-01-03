@@ -88,7 +88,7 @@ resource "azurerm_key_vault_access_policy" "api_access" {
   tenant_id    = azurerm_key_vault.keyvault.tenant_id
   object_id    = azurerm_user_assigned_identity.keyvault_api_managed_identity.principal_id
 
-  secret_permissions = ["Get"]
+  secret_permissions = ["Get","Set","Delete"]
 }
 
 # Storage
