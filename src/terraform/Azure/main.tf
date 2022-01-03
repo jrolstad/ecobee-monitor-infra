@@ -111,6 +111,13 @@ resource "azurerm_storage_account" "datalake" {
   is_hns_enabled           = "true"
 }
 
+## Assign Permissions
+resource "azurerm_role_assignment" "datalake_contributor" {
+  scope                = azurerm_storage_account.datalake.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.datalake_managed_identity.id
+}
+
 # Logging
 resource "azurerm_log_analytics_workspace" "loganalytics" {
   name                = "${var.service_name}-${var.environment}"
