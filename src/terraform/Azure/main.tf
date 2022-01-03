@@ -100,6 +100,17 @@ resource "azurerm_storage_account" "storage_account" {
   account_replication_type = "GRS"
 }
 
+# Data Lake
+resource "azurerm_storage_account" "datalake" {
+  name                     = "${var.service_name}lake${var.environment}"
+  resource_group_name      = azurerm_resource_group.service_resource_group.name
+  location                 = azurerm_resource_group.service_resource_group.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+  account_kind             = "StorageV2"
+  is_hns_enabled           = "true"
+}
+
 # Logging
 resource "azurerm_log_analytics_workspace" "loganalytics" {
   name                = "${var.service_name}-${var.environment}"
@@ -247,7 +258,7 @@ resource "azurerm_function_app" "function_worker" {
     "Cosmos_BaseUri"                        = azurerm_cosmosdb_account.cosmosaccount.endpoint
     "KeyVault_BaseUri"                      = azurerm_key_vault.keyvault.vault_uri
     "KeyVault_ManagedIdentityClientId"      = azurerm_user_assigned_identity.keyvault_api_managed_identity.client_id
-    "DataLake_BaseUri"                      = "<none>"
+    "DataLake_BaseUri"                      = "https://${azurerm_storage_account.datalake.name}.dfs.core.windows.net"
     "DataLake_ManagedIdentityClientId"      = azurerm_user_assigned_identity.datalake_managed_identity.client_id
     "RuntimeReport_Cron"                    = "0 0 */6 * * *"
   }
