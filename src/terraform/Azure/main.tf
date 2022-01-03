@@ -115,7 +115,7 @@ resource "azurerm_storage_account" "datalake" {
 resource "azurerm_role_assignment" "datalake_contributor" {
   scope                = azurerm_storage_account.datalake.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.datalake_managed_identity.id
+  principal_id         = azurerm_user_assigned_identity.datalake_managed_identity.principal_id
 }
 
 # Logging
