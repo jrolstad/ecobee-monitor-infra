@@ -1,4 +1,4 @@
-$serviceName = "ecobee-monitor"
+$serviceName = "ecobeemonitor"
 $environment = "dev"
 
 terraform apply -input=false `

@@ -1,5 +1,5 @@
 $fileName = "dev.terraform.tfstate"
-$serviceName = "ecobee-monitor"
+$serviceName = "ecobeemonitor"
 $environment = "dev"
 
 terraform plan -input=false `
